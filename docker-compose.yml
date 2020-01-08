@@ -1,0 +1,27 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        restart: always
+        volumes:
+            - ./db:/var/lib/mysql
+            - ./conf/my.cnf:/etc/my.cnf
+            - ./init:/docker-entrypoint-initdb.d/
+        environment:
+            MYSQL_ROOT_PASSWORD: '123456'
+            MYSQL_USER: 'test'
+            MYSQL_PASS: '123456'
+        ports:
+            - 3306:3306
+    koa:
+        image: node
+        restart: always
+        ports:
+            - 3000:3000
+        volumes:
+            - ./src/:/koa/
+        command:
+          - /bin/sh
+          - -c
+          - |
+            cd /koa/ && npm install -g nodemon && npm install && nodemon app.js

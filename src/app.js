@@ -22,12 +22,12 @@ router.get('/qrcode',async (ctx)=>{
 
 router.get('/message', async (ctx, next) => {
     let data = await mysql.query();
-    ctx.body = data[0].title;
+    ctx.body = data;
 });
 
 
 router.get('/', async (ctx, next) => {
-  ctx.response.body = '<h1>index</h1>';
+  ctx.response.body = '<h1>1index</h1>';
 });
 
 App
