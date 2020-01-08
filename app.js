@@ -1,9 +1,12 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 
-const app = new Koa();
+const App = new Koa();
 const router = new Router();
 const qr = require('qr-image');
+
+const config = require('./config.js');
+const mysql = require('./mysql.js');
 
 router.get('/qrcode',async (ctx)=>{
     const qrCode = ctx.query && ctx.query.data;
@@ -17,13 +20,19 @@ router.get('/qrcode',async (ctx)=>{
     }
 })
 
-router.get('/', async (ctx, next) => {
-  ctx.response.body = '<h5>Index</h5>';
+router.get('/message', async (ctx, next) => {
+    let data = await mysql.query();
+    ctx.body = data[0].title;
 });
 
-app
-	.use(router.routes())
-  .use(router.allowedMethods());
+
+router.get('/', async (ctx, next) => {
+  ctx.response.body = '<h1>index</h1>';
+});
+
+App
+    .use(router.routes())
+    .use(router.allowedMethods());
 
 
-app.listen(3000);
+App.listen(config.appPort);
