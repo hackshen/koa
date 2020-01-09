@@ -5,7 +5,7 @@ const config = {
 		port: '3306',
 		user: 'root',
 		password: '123456',
-		database: 'du_ji_tang',
+		database: 'daily_msg',
 	}
 }
 module.exports = config;

@@ -13,13 +13,13 @@ class Mysql {
 
 	}
 
-	query(){
+	query(table, limit){
 		return new Promise((resolve, reject)=>{
 			pool.getConnection(function(err, connection) {
 				if (err) {
 				    console.log(err)
 				}else {
-					connection.query('SELECT * FROM soul ORDER BY RAND() LIMIT 1',  (error, results, fields) => {
+					connection.query(`SELECT * FROM ${table} ORDER BY RAND() LIMIT ${limit}`,  (error, results, fields) => {
 						resolve(results)
 						// 结束会话
 						connection.release();
