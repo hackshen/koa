@@ -21,7 +21,11 @@ services:
         volumes:
             - ./src/:/koa/
         command:
-          - /bin/sh
-          - -c
-          - |
-            cd /koa/ && npm install -g nodemon && npm install && nodemon app.js
+            - /bin/sh
+            - -c
+            - |
+            cd /koa/ \
+            && npm install -g cnpm --registry=https://registry.npm.taobao.org \
+            && cnpm install -g nodemon \
+            && cnpm install \
+            && nodemon app.js
