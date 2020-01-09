@@ -26,9 +26,9 @@ router.get('/message', async (ctx, next) => {
     let ctxQuery = ctx.query;
     let queryTable = ctxQuery.table && dataTable.indexOf(ctxQuery.table) != -1 ? ctxQuery.table : 'chicken_soup';
     let queryLimit = ctxQuery.limit && /^\d{0,5}$/.test(ctxQuery.limit) ? ctxQuery.limit : 1;
-    console.log(queryTable,3456789)
+    let queryType = ctxQuery.type
     let resData = await mysql.query(queryTable, queryLimit);
-    ctx.body = resData;
+    ctx.body = queryType == 'text' ? resData[0].title : resData;
 });
 
 
