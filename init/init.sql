@@ -1,10 +1,10 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : api.hackshen.com
+ Source Server         : i.hackshen.com
  Source Server Type    : MySQL
  Source Server Version : 50728
- Source Host           : api.hackshen.com:3306
+ Source Host           : i.hackshen.com:3306
  Source Schema         : daily_msg
 
  Target Server Type    : MySQL
