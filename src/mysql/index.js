@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const config = require('./config.js');
+const config = require('../conf');
 const pool = mysql.createPool({
 	host: config.db.host,
 	user: config.db.user,
@@ -13,23 +13,25 @@ class Mysql {
 
 	}
 
-	query(table, limit) {
+	query(sql, values) {
 		return new Promise((resolve, reject) => {
 			pool.getConnection(function (err, connection) {
 				if (err) {
-					console.log(err)
+					reject(err)
 				} else {
-					connection.query(`SELECT * FROM ${table} ORDER BY RAND() LIMIT ${limit}`, (error, results, fields) => {
-						resolve(results)
-						// 结束会话
-						connection.release();
-						// 如果有错误就抛出
-						if (error) throw error;
+					connection.query(sql, values, (err, rows) => {
+						if (err) {
+							reject(err)
+						} else {
+							resolve(rows)
+						}
+						connection.release()
 					})
 				}
 			})
 		})
 	}
+
 }
 
 module.exports = new Mysql();
