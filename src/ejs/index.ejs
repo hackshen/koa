@@ -15,7 +15,7 @@
         $('.ant-btn-primary').on('click', function () {
             const domainData = $('.doamin-input').val();
             localStorage.domain = domainData;
-        	fetch(`http://localhost:81/domain?data=${domainData}`, {
+        	fetch(`http://api.hackshen.com/domain?data=${domainData}`, {
         		method: "GET",
         	}).then(response => response.json()).then((res) => {
         		let html = '';
