@@ -42,10 +42,17 @@ router.get('/message', async (ctx, next) => {
 
 router.get('/domain', async (ctx, next) => {
 	const req = ctx.request;
-	const reqData = domainData || JSON.parse(req.query.data);// domainData;
-	const msg = await ddns(reqData);
-
-	ctx.body = {mes: msg};
+	if (req.query.data) {
+		const reqData = JSON.parse(req.query.data);
+		const msg = await ddns(reqData);
+		ctx.body = msg;
+		return;
+	}
+	let title = 'Domain Update'
+	await ctx.render('index', {
+		title,
+		req
+	})
 });
 
 router.get('/', async (ctx, next) => {
