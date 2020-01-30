@@ -1,16 +1,21 @@
 const fs = require('fs');
 const Koa = require('koa');
+const path = require('path');
 const Router = require('koa-router');
 
 const App = new Koa();
 const router = new Router();
+const views = require('koa-views');
 
 const qr = require('qr-image');
-
 const config = require('./conf');
 const mysql = require('./mysql');
 const ddns = require('./ddns');
-const domainData = require('./conf/domain');
+
+// 加载模板引擎
+App.use(views(path.join(__dirname, './ejs'), {
+	extension: 'ejs'
+}))
 
 App.use(async (ctx, next) => {
 	ctx.set("Access-Control-Allow-Origin", "*")
