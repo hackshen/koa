@@ -13,7 +13,7 @@ node:latest
 #### 运行: 
 
 ```bash
-# clonse 项目到本地
+# clone 项目到本地
 git clone https://github.com/hackshen/koa.git
 # 在当前目录执行
 docker-compose up -d
@@ -34,4 +34,9 @@ http://127.0.0.1:3000/message?table=rainbow&limit=3
 /qrcode
 ```bash
 http://127.0.0.1:3000/qrcode?data=Hello
+```
+
+/domain
+```bash
+http://127.0.0.1:3000/domain
 ```
