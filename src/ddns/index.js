@@ -33,7 +33,7 @@ const DDNS = async (client, target, cb) => {
 	};
 
 	let shouldUpdate = false;
-	let shouldAdd = true;
+	let shouldAdd = null;
 	let originIp = '';
 
 	await client.request(describeSubParams.Action, describeSubParams, requestOption).then((result) => {
@@ -67,7 +67,7 @@ const DDNS = async (client, target, cb) => {
 		});
 	}
 
-	if (!shouldAdd && !shouldUpdate) {
+	if (shouldAdd === false && shouldUpdate === false) {
 		return cb('no update');
 	}
 
