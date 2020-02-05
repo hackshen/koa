@@ -7,7 +7,6 @@ const req = require('./req');
 router.get('/', req);
 router.get('/qrcode', qrcode);
 router.get('/domain', domain);
-router.post('/domain', domainPost);
 router.get('/message', message);
 
 module.exports = router;
