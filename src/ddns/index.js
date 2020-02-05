@@ -33,7 +33,7 @@ const DDNS = async (client, target, cb) => {
 	};
 
 	let shouldUpdate = false;
-	let shouldAdd = null;
+	let shouldAdd = true;
 	let originIp = '';
 
 	await client.request(describeSubParams.Action, describeSubParams, requestOption).then((result) => {
@@ -49,6 +49,7 @@ const DDNS = async (client, target, cb) => {
 			});
 	}, (ex) => {
 		console.log(ex);
+		return cb('Error');
 	});
 
 	if (shouldUpdate) {
@@ -56,6 +57,7 @@ const DDNS = async (client, target, cb) => {
 			return cb('Update success!', originIp, updateParmas.Value);
 		}, (ex) => {
 			console.log(ex);
+			return cb('Error');
 		});
 	}
 
@@ -64,6 +66,7 @@ const DDNS = async (client, target, cb) => {
 			return cb('add success!');
 		}, (ex) => {
 			console.log(ex);
+			return cb('Error');
 		});
 	}
 
