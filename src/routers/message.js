@@ -1,7 +1,6 @@
-const router = require('koa-router')();
 const mysql = require('../mysql');
 
-module.exports = router.get('/', async (ctx, next) => {
+module.exports = async (ctx, next) => {
 	const dataTable = ['chicken_soup', 'rainbow'];
 	let ctxQuery = ctx.query;
 	let queryTable = ctxQuery.table && dataTable.indexOf(ctxQuery.table) != -1 ? ctxQuery.table : 'chicken_soup';
@@ -10,4 +9,4 @@ module.exports = router.get('/', async (ctx, next) => {
 	let sql = `SELECT * FROM ${queryTable} ORDER BY RAND() LIMIT ${queryLimit}`
 	let resData = await mysql.query(sql);
 	ctx.body = queryType == 'text' ? resData[0].title : resData;
-});
+};

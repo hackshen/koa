@@ -1,7 +1,6 @@
-const router = require('koa-router')();
 const domain = require('../ddns');
 
-module.exports = router.get('/', async (ctx, next) => {
+module.exports = async (ctx, next) => {
 	const req = ctx.request;
 	if (req.query.data) {
 		const reqData = JSON.parse(req.query.data);
@@ -14,4 +13,5 @@ module.exports = router.get('/', async (ctx, next) => {
 		title,
 		req
 	})
-});
+};
+

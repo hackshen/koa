@@ -1,6 +1,4 @@
-const router = require('koa-router')();
-
-module.exports = router.get('/', async (ctx, next) => {
+module.exports = async (ctx, next) => {
 	// ctx.response.type = 'html';
 	// ctx.response.body = os.networkInterfaces();
 	const req = ctx.request;
@@ -15,4 +13,4 @@ module.exports = router.get('/', async (ctx, next) => {
 		querystring,
 		req,
 	}
-});
+};
