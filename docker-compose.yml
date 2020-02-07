@@ -19,6 +19,13 @@ services:
       MYSQL_ROOT_PASSWORD: '123456'
     ports:
       - 3306:3306
+  php:
+    image: php:fpm
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - ./web/php:/var/www/html
   koa:
     image: node
     restart: always
