@@ -1,42 +1,33 @@
-# koa
-
-##### koa写的接口，数据来源https://github.com/egotong/nows 
+# egg
 
 
-#### 运行环境:
 
-```bash
-centos:7
-mysql:5.7 # 默认密码123456 ，具体配置文件在docker-compose.yml
-node:latest
-```
-#### 运行: 
+## QuickStart
+
+<!-- add docs here for user -->
+
+see [egg docs][egg] for more detail.
+
+### Development
 
 ```bash
-# clone 项目到本地
-git clone https://github.com/hackshen/koa.git
-# 在当前目录执行
-docker-compose up -d
-
-# 浏览器访问 127.0.0.1:3000
+$ npm i
+$ npm run dev
+$ open http://localhost:7001/
 ```
 
-#### API:
-/message
+### Deploy
+
 ```bash
-http://127.0.0.1:3000/message?table=rainbow&limit=3
-可选参数:
-    table: rainbow、chicken_soup （目前支持两个表 ）
-    limit: 1 （查询条数）
-    type: text (默认返回一个对象)
+$ npm start
+$ npm stop
 ```
 
-/qrcode
-```bash
-http://127.0.0.1:3000/qrcode?data=Hello
-```
+### npm scripts
 
-/domain
-```bash
-http://127.0.0.1:3000/domain
-```
+- Use `npm run lint` to check code style.
+- Use `npm test` to run unit test.
+- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
+
+
+[egg]: https://eggjs.org
