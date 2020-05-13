@@ -1,12 +1,12 @@
-const {host, port, user, password, database, appPort} = process.env;
+const {DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT} = process.env;
 const config = {
-    appPort: appPort,
+    appPort: APP_PORT,
     db: {
-        "host": host,
-        "port": port,
-        "user": user,
-        "password": password,
-        "database": database,
+        "host": DB_HOST,
+        "port": DB_PORT,
+        "user": DB_USER,
+        "password": DB_PWD,
+        "database": DB_NAME,
     }
 };
 module.exports = config;

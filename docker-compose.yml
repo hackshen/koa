@@ -8,7 +8,12 @@ services:
       - 443:443
     volumes:
       - ./ssl:/usr/share/nginx/html/ssl
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/tmp.ng
+    environment:
+      APP_PORT: 3000
+      APP_NAME: koa
+    command: /bin/bash -c "envsubst '$$APP_PORT $$APP_NAME' < /etc/nginx/conf.d/tmp.ng > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
   db:
     image: mysql:5.7
     restart: always
@@ -24,12 +29,12 @@ services:
     image: node
     restart: always
     environment:
-      appPort: 3000
-      host: db
-      port: 3306
-      user: root
-      password: 123456
-      database: daily_msg
+      APP_PORT: 3000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PWD: 123456
+      DB_NAME: daily_msg
     ports:
       - 3000:3000
     volumes:
