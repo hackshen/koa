@@ -17,12 +17,19 @@ services:
       - ./conf/my.cnf:/etc/my.cnf
       - ./init:/docker-entrypoint-initdb.d/
     environment:
-      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: 123456
     ports:
       - 3306:3306
   koa:
     image: node
     restart: always
+    environment:
+      appPort: 3000
+      host: db
+      port: 3306
+      user: root
+      password: 123456
+      database: daily_msg
     ports:
       - 3000:3000
     volumes:
@@ -31,9 +38,5 @@ services:
       - /bin/sh
       - -c
       - |
-        cd /koa/ \
-        && npm install -g cnpm --registry=https://registry.npm.taobao.org \
-        && cnpm install -g nodemon \
-        && cnpm install \
-        && nodemon app.js
+        cd /koa && npm install && npm start
 
