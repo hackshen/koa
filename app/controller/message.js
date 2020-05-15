@@ -8,5 +8,10 @@ module.exports = async (ctx, next) => {
     const queryType = query.type
     const sql = `SELECT * FROM ${queryTable} ORDER BY RAND() LIMIT ${queryLimit}`
     const resData = await mysql.query(sql);
+    resData.map(async item => {
+        const hits = Number(item.hits) + 1;
+        const updateHits = `UPDATE ${queryTable} SET hits=${hits} WHERE id=${item.id}`;
+        await mysql.query(updateHits)
+    })
     ctx.body = queryType == 'text' ? resData[0].title : resData;
 };
