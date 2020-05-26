@@ -36,7 +36,7 @@ services:
       DB_PWD: 123456
       DB_NAME: daily_msg
     ports:
-      - 3000:3000
+      - 3000
     volumes:
       - ./app/:/koa/
     command:
