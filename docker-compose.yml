@@ -8,7 +8,8 @@ services:
       - 443:443
     volumes:
       - ./ssl:/usr/share/nginx/html/ssl
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/tmp.ng
+#      - ./nginx/nginx.conf:/etc/nginx/conf.d/tmp.ng
+      - ./nginx/dev.conf:/etc/nginx/conf.d/tmp.ng
     environment:
       APP_PORT: 3000
       APP_NAME: koa

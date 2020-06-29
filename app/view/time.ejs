@@ -21,7 +21,6 @@
     setInterval(()=>{
         const currentTime = new Date().getTime() - startTime;
         const timeText = formatDuring(currentTime);
-
         document.getElementsByClassName('time-con')[0].innerHTML = timeText;
     },1000);
 </script>

@@ -12,7 +12,7 @@ class Mysql {
     constructor() {
 
     }
-
+    
     query(sql, values) {
         return new Promise((resolve, reject) => {
             pool.getConnection(function (err, connection) {
@@ -30,10 +30,6 @@ class Mysql {
                 }
             })
         })
-    }
-
-    set() {
-
     }
 }
 

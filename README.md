@@ -19,6 +19,9 @@ git clone https://github.com/hackshen/koa.git
 docker-compose up -d
 
 # 浏览器访问 127.0.0.1:3000
+
+# 扩容多个koa服务（nginx需要重启）
+docker-compose up --scale koa=4 -d
 ```
 
 #### API:

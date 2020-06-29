@@ -8,7 +8,7 @@ router.get('/', home);
 router.get('/qrcode', qrcode);
 router.get('/domain', domain);
 router.get('/message', message);
-router.get('/time', async (ctx, next)=>{
+router.get('/time', async (ctx, next) => {
     await ctx.render('time', {
         name: 1590639000000
     })
