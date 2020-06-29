@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="time-con"></div>
+<script>
+    const startTime = <%= name %>;
+    function formatDuring(time) {
+        var days = parseInt(time / (1000 * 60 * 60 * 24));
+        var hours = parseInt((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = parseInt((time % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = ((time % (1000 * 60)) / 1000).toFixed(0);
+        return days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
+    }
+    setInterval(()=>{
+        const currentTime = new Date().getTime() - startTime;
+        const timeText = formatDuring(currentTime);
+
+        document.getElementsByClassName('time-con')[0].innerHTML = timeText;
+    },1000);
+</script>
+</body>
+</html>
