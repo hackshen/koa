@@ -9,12 +9,16 @@ router.get('/', home);
 router.get('/qrcode', qrcode);
 router.get('/domain', domain);
 router.get('/message', message);
-router.get('/node/:name',async (ctx, next)=>{
+router.get('/node/:name', async (ctx, next) => {
+
     const name = ctx.params.name; // 获取请求参数
+    const {query} = ctx;
+    console.log(query)
     const insterText = name;
-    const ins = `INSERT INTO node VALUES ('${name}', '${insterText}');`
+    const ins = `INSERT INTO node VALUES ('${name}', '${insterText}',0);`
     const querySQL = `SELECT * FROM node where id='${name}'`
     const insc = await mysql.query(querySQL)
+    console.log(ins, 1)
     if (insc.length !== 0) {
         const name = insc[0].title
         await ctx.render('node', {
@@ -27,5 +31,7 @@ router.get('/node/:name',async (ctx, next)=>{
         })
     }
 })
+
+router.get('/node/')
 
 module.exports = router;
