@@ -8,8 +8,7 @@ services:
       - ${NG_HTTPS}:${NG_HTTPS}
     volumes:
       - ./ssl:/usr/share/nginx/html/ssl
-#      - ./nginx/nginx.conf:/etc/nginx/conf.d/tmp.ng
-      - ./nginx/dev.conf:/etc/nginx/conf.d/tmp.ng
+      - ./nginx/${NG_ENV:-pro}.conf:/etc/nginx/conf.d/tmp.ng
     environment:
       APP_PORT: ${APP_PORT}
       APP_NAME: ${APP_NAME}
