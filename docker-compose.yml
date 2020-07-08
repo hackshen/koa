@@ -4,14 +4,14 @@ services:
     image: nginx
     restart: always
     ports:
-      - ${NG_HTTP}:${NG_HTTP}
-      - ${NG_HTTPS}:${NG_HTTPS}
+      - ${NG_HTTP:-80}:${NG_HTTP:-80}
+      - ${NG_HTTPS:-443}:${NG_HTTPS:-443}
     volumes:
       - ./ssl:/usr/share/nginx/html/ssl
-      - ./nginx/${NG_ENV:-pro}.conf:/etc/nginx/conf.d/tmp.ng
+      - ./nginx/${NG_ENV:-dev}.conf:/etc/nginx/conf.d/tmp.ng
     environment:
-      APP_PORT: ${APP_PORT}
-      APP_NAME: ${APP_NAME}
+      APP_PORT: ${APP_PORT:-3000}
+      APP_NAME: ${APP_NAME:-koa}
     command: /bin/bash -c "envsubst '$$APP_PORT $$APP_NAME' < /etc/nginx/conf.d/tmp.ng > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   db:
@@ -22,21 +22,21 @@ services:
       - ./conf/my.cnf:/etc/my.cnf
       - ./init:/docker-entrypoint-initdb.d/
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PWD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PWD:-123456}
     ports:
-      - ${MYSQL_PORT}:${MYSQL_PORT}
+      - ${MYSQL_PORT:-3306}:${MYSQL_PORT:-3306}
   koa:
     image: node
     restart: always
     environment:
-      APP_PORT: ${APP_PORT}
+      APP_PORT: ${APP_PORT:-3000}
       DB_HOST: db
-      DB_PORT: ${MYSQL_PORT}
+      DB_PORT: ${MYSQL_PORT:-3306}
       DB_USER: root
-      DB_PWD: ${MYSQL_PWD}
+      DB_PWD: ${MYSQL_PWD:-123456}
       DB_NAME: ${DB_NAME}
     ports:
-      - ${APP_PORT}
+      - ${APP_PORT:-3000}
     volumes:
       - ./app/:/koa/
     command:
