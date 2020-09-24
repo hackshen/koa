@@ -4,8 +4,8 @@ services:
     image: nginx
     restart: always
     ports:
-      - ${NG_HTTP:-80}:${NG_HTTP:-80}
-      - ${NG_HTTPS:-443}:${NG_HTTPS:-443}
+      - ${NG_HTTP:-80}:80
+      - ${NG_HTTPS:-443}:443
     volumes:
       - ./ssl:/usr/share/nginx/html/ssl
       - ./nginx/${NG_ENV:-dev}.conf:/etc/nginx/conf.d/tmp.ng
@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PWD:-123456}
     ports:
-      - ${MYSQL_PORT:-3306}:${MYSQL_PORT:-3306}
+      - ${MYSQL_PORT:-3306}:3306
   koa:
     image: node
     restart: always
