@@ -30,7 +30,9 @@
     setInterval(()=>{
         const currentTime = new Date().getTime() - startTime;
         const timeText = formatDuring(currentTime);
-        document.getElementsByClassName('time-con')[0].innerHTML = timeText;
+        var timeCon = document.getElementsByClassName('time-con')[0];
+        timeCon.innerHTML = timeText;
+        timeCon.style['color'] = `#${Math.random().toString(16).substr(2, 6).toUpperCase()}`;
     },1000);
 </script>
 </body>
