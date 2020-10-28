@@ -14,6 +14,14 @@
             align-items: center;
             margin: 0;
         }
+        .end-time {
+            position: fixed;
+            bottom: 0px;
+            color: #333;
+            color: #999;
+            font-size: 12px;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
@@ -35,5 +43,6 @@
         timeCon.style['color'] = `#${Math.random().toString(16).substr(2, 6).toUpperCase()}`;
     },1000);
 </script>
+<div class="end-time">2020年12月6日 23:59</div>
 </body>
 </html>
