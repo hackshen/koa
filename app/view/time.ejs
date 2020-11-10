@@ -13,6 +13,7 @@
             justify-content: center;
             align-items: center;
             margin: 0;
+            padding: 0;
         }
         .page-bottom {
             position: fixed;
@@ -36,21 +37,22 @@
 </div>
 <script>
     const startTime = <%= name %>;
-    function formatDuring(time) {
-        var days = parseInt(time / (1000 * 60 * 60 * 24));
-        var hours = parseInt((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = parseInt((time % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = ((time % (1000 * 60)) / 1000).toFixed(0);
-        return days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
+    function formatDate(timetamp) {
+        const currentTime = new Date().getTime();
+        const time = Math.abs(timetamp - currentTime);
+        const days = Math.floor(time / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(time / (1000 * 60 * 60)) % 24;
+        const mins = Math.floor(time / (1000 * 60)) % 60;
+        const secs = Math.floor(time / 1000) % 60;
+        return `${days} 天 ${hours} 小时 ${mins} 分钟 ${secs} 秒`
     }
+
     setInterval(()=>{
-        const currentTime = new Date().getTime() - startTime;
-        const newYear = 1612972800000 - new Date().getTime();
-        const timeText = formatDuring(currentTime);
-        const newYearTime = formatDuring(newYear);
-        var timeCon = document.getElementsByClassName('time-con')[0];
-        var newYearNode = document.getElementsByClassName('new-year-time')[0];
-        timeCon.innerHTML = timeText;
+        const knowTime = formatDate(1590639000000);
+        const newYearTime = formatDate(1612972800000);
+        const knowNode = document.getElementsByClassName('time-con')[0];
+        const newYearNode = document.getElementsByClassName('new-year-time')[0];
+        knowNode.innerHTML = knowTime;
         newYearNode.innerHTML = `新年倒計時: ${newYearTime}`;
         // timeCon.style['color'] = `#${Math.random().toString(16).substr(2, 6).toUpperCase()}`;
     },1000);
