@@ -34,12 +34,14 @@
 <div class="page-bottom">
     <div class="end-time">2020年12月6日 23:59</div>
     <div class="new-year-time">Loading......</div>
+    <div class="ali-work-time">Loading......</div>
 </div>
 <script>
     const startTime = <%= name %>;
     function formatDate(timetamp) {
         const currentTime = new Date().getTime();
         const time = Math.abs(timetamp - currentTime);
+        // const years = Math.floor(time / (1000 * 60 * 60 * 24 * 365))
         const days = Math.floor(time / (1000 * 60 * 60 * 24));
         const hours = Math.floor(time / (1000 * 60 * 60)) % 24;
         const mins = Math.floor(time / (1000 * 60)) % 60;
@@ -50,10 +52,13 @@
     setInterval(()=>{
         const knowTime = formatDate(1590639000000);
         const newYearTime = formatDate(1612972800000);
+        const aliWorkTime = formatDate(1502067600000);
         const knowNode = document.getElementsByClassName('time-con')[0];
         const newYearNode = document.getElementsByClassName('new-year-time')[0];
+        const newAliWorkTime = document.getElementsByClassName('ali-work-time')[0];
         knowNode.innerHTML = knowTime;
         newYearNode.innerHTML = `新年倒計時: ${newYearTime}`;
+        newAliWorkTime.innerHTML = `Ali Work ${aliWorkTime}`;
         // timeCon.style['color'] = `#${Math.random().toString(16).substr(2, 6).toUpperCase()}`;
     },1000);
 </script>
