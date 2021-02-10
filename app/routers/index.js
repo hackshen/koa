@@ -4,6 +4,19 @@ const domain = require('../controller/domain');
 const message = require('../controller/message');
 const home = require('../controller/home');
 
+router.get('/lucky',async(ctx, next)=>{
+    const {query} = ctx;
+    const {user_name, alipay_name}= query
+    if (user_name && alipay_name) {
+        const sql = `INSERT INTO hshen VALUES (0,'${user_name}', '${alipay_name}');`
+        await mysql.query(sql);
+        return ctx.body = 'success';
+    }
+    const sql = `SELECT * FROM hshen`;
+    const data = await mysql.query(sql);
+    ctx.body = data;
+});
+
 router.get('/', home);
 router.get('/qrcode', qrcode);
 router.get('/domain', domain);
