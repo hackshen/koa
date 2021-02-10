@@ -3,6 +3,8 @@ const qrcode = require('../controller/qrcode');
 const domain = require('../controller/domain');
 const message = require('../controller/message');
 const home = require('../controller/home');
+const mysql = require('../mysql');
+
 
 router.get('/lucky',async(ctx, next)=>{
     const {query} = ctx;
