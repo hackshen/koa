@@ -6,6 +6,7 @@ const home = require('../controller/home');
 const mysql = require('../mysql');
 const jsonp = require('../controller/jsonp');
 const sourceMap = require('../controller/sourceMap');
+const pac = require('../controller/pacfile');
 
 
 router.get('/lucky', async (ctx, next) => {
@@ -27,6 +28,7 @@ router.get('/domain', domain);
 router.get('/message', message);
 router.get('/jsonp', jsonp);
 router.get('/sourcemap', sourceMap);
+router.get('/pac.pac', pac);
 
 router.get('/time', async (ctx, next) => {
     await ctx.render('time', {
@@ -34,16 +36,16 @@ router.get('/time', async (ctx, next) => {
     })
 });
 let OSS = require('ali-oss');
-let client = new OSS({
-    region: 'oss-cn-hangzhou',
-    accessKeyId: '',
-    accessKeySecret: '',
-    bucket: 'hackshen-oss',
-});
+// let client = new OSS({
+//     region: 'oss-cn-hangzhou',
+//     accessKeyId: '',
+//     accessKeySecret: '',
+//     bucket: 'hackshen-oss',
+// });
 
-router.get('/test', async (ctx, next) => {
-    let result = await client.list();
-    ctx.body = result.objects;
-});
+// router.get('/test', async (ctx, next) => {
+//     let result = await client.list();
+//     ctx.body = result.objects;
+// });
 
 module.exports = router;
