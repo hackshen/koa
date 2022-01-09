@@ -35,6 +35,7 @@ services:
       DB_USER: root
       DB_PWD: ${MYSQL_PWD:-123456}
       DB_NAME: ${DB_NAME}
+      PAC_DOMAIN: ${PAC_DOMAIN}
     ports:
       - ${APP_PORT:-3000}
     volumes:
