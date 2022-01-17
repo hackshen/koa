@@ -1,5 +1,5 @@
 const sourceMap = require('source-map');
-const fs = require('fs-extra');
+// const fs = require('fs-extra');
 
 const rawSourceMap = {
   "version": 3,
@@ -18,7 +18,7 @@ module.exports = async (ctx) => {
   consumer.sources.forEach(source=>{
     const bb = consumer.sourceContentFor(source);
     map[source] = bb;
-    fs.writeFileSync(`${source.replace(/\//g, '-')}.js`, bb, 'utf8');
+    // fs.writeFileSync(`${source.replace(/\//g, '-')}.js`, bb, 'utf8');
 
   });
   ctx.body = map;

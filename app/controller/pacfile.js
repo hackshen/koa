@@ -10,16 +10,16 @@ const arr = [
   'githubapp.com',
   'github.com',
   'githubassets.com',
+  'v2ex.com',
 ];
 
 const outList = () => {
   return `function FindProxyForURL(url, host) {
-      ${arr.map(item => {
-        return template(item, pacDomain);
-      }).join('')}
+        ${arr.map(item => template(item, pacDomain)).join('\n')}
     return "DIRECT";
   }`
 }
 module.exports = async (ctx, next) => {
   ctx.body = outList();
 };
+
