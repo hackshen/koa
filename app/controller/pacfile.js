@@ -11,6 +11,7 @@ const arr = [
   'github.com',
   'githubassets.com',
   'v2ex.com',
+  'codesandbox.io',
 ];
 
 const outList = () => {
