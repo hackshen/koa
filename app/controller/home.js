@@ -7,10 +7,10 @@ module.exports = async (ctx, next) => {
     // ctx.response.body = os.networkInterfaces();
     const {request} = ctx;
     const {url, method, query, querystring} = request;
-
+    console.log(netInfo.eth0)
     ctx.body = {
         osType: osType,
-        netInfo: netInfo.eth0[0],
+        netInfo: netInfo,
         url,
         method,
         query,

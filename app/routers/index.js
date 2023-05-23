@@ -8,6 +8,7 @@ const jsonp = require('../controller/jsonp');
 const sourceMap = require('../controller/sourceMap');
 const pac = require('../controller/pacfile');
 const getToken = require('../controller/getToken');
+const wol = require('../controller/wol');
 
 
 router.get('/lucky', async (ctx, next) => {
@@ -31,6 +32,7 @@ router.get('/jsonp', jsonp);
 router.get('/sourcemap', sourceMap);
 router.get('/pac.pac', pac);
 router.get('/callback', getToken);
+router.get('/wol', wol);
 
 
 

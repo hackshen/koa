@@ -12,6 +12,7 @@
   "dependencies": {
     "@alicloud/pop-core": "^1.7.7",
     "ali-oss": "^6.13.2",
+    "axios": "^0.24.0",
     "chokidar": "^3.3.0",
     "colors": "^1.4.0",
     "ejs": "^3.0.1",
