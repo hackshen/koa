@@ -4,6 +4,7 @@ const template = (domain, proxy) => {
   return `if (shExpMatch(url, "*.${domain}*") || shExpMatch(url, "*://${domain}*")) return '${proxy}';`
 }
 const arr = [
+  'translate.googleapis.com',
   'google.com',
   'googleapis.com',
   'githubusercontent.com',
