@@ -1,25 +1,19 @@
 const udp = require('dgram');
-function createMagicPacket(mac) {
-  const m = mac.replace(/[^0-9a-fA-F]/g, '');
-  const bufMac = Buffer.from(m, 'hex');
-  let bufRes = Buffer.alloc(6, 0xff);
-  for (let i = 0; i < 16; i++) {
-    bufRes = Buffer.concat([bufRes, bufMac]);
-  }
-  return bufRes;
-}
-
-function wakeOnLAN(mac, options) {
-  options = Object.assign({
-    address: '127.0.0.1',
-    port: 0,
-  }, options);
-
+const wakeOnLAN = (mac, options) => {
+  const { address, port } = {
+    address: '192.168.66.130',
+    port: 9,
+    ...options,
+  };
+  const magicPacket = Mac => {
+    const macFormat = Mac.replaceAll('-', '');
+    const bufMac = Buffer.from(macFormat, 'hex');
+    const bufFirst = Buffer.alloc(6, 0xff);
+    return Buffer.concat([bufFirst, Buffer.alloc(16 * bufMac.length, bufMac)]);
+  };
   return new Promise((resolve, reject) => {
-    const packet = createMagicPacket(mac);
-
+    const packet = magicPacket(mac);
     const socket = udp.createSocket('udp4');
-
     socket.on('error', (err) => {
       socket.close();
       reject(err);
@@ -27,10 +21,8 @@ function wakeOnLAN(mac, options) {
 
     socket.send(
       packet,
-      0,
-      packet.length,
-      options.port,
-      options.address,
+      port,
+      address,
       (err, res) => {
         socket.close();
         if (err) {
@@ -40,7 +32,8 @@ function wakeOnLAN(mac, options) {
       },
     );
   });
-}
+};
+
 
 module.exports = async (ctx, next) => {
     const {query} = ctx;
